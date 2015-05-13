@@ -1,4 +1,4 @@
-'.source.python':
+'.source.serpent':
   'editor':
     'autoIndentOnPaste': false
     'tabLength': 4

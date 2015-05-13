@@ -1,5 +1,5 @@
-'scopeName': 'text.python.console'
-'name': 'Python Console'
+'scopeName': 'text.serpent.console'
+'name': 'Ethereum Console'
 'fileTypes': [
   'doctest'
   'pycon'
@@ -9,10 +9,10 @@
     'match': '^(>{3}|\\.{3}|In \\[\\d+\\]:) (.+)$'
     'captures':
       '1':
-        'name': 'punctuation.separator.prompt.python.console'
+        'name': 'punctuation.separator.prompt.serpent.console'
       '2':
         'patterns': [
-          'include': 'source.python'
+          'include': 'source.serpent'
         ]
   }
 ]

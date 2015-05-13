@@ -1,4 +1,4 @@
-'.source.python':
+'.source.serpent':
   '#!/usr/bin/env python':
     'prefix': 'env'
     'body': '#!/usr/bin/env python\n'
@@ -98,7 +98,7 @@
   'if __name__ == \'__main__\'':
     'prefix': 'ifmain'
     'body': 'if __name__ == \'__main__\':\n\t${1:main()}$0'
-'.source.python:not(.string)':
+'.source.serpent:not(.string)':
   'self':
     'prefix': '.'
     'body': 'self.'
