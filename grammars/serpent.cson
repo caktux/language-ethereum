@@ -684,6 +684,9 @@
   'constant_placeholder':
     'match': '(?i:(%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?([hL][a-z]|[a-z%]))|(\\{([!\\[\\].:\\w ]+)?\\}))'
     'name': 'constant.other.placeholder.serpent'
+  'special_variables':
+    'match': '(?x)\\b(\n\t\t\t\ttx\.origin|tx\.gas|tx\.gasprice|msg\.sender|msg\.value|\.balance|block\.coinbase|block\.timestamp|block\.prevhash|block\.difficulty|block\.number|block\.gaslimit\n\t\t\t)\\b'
+    'name': 'support.type.variables.serpent'
   'docstrings':
     'patterns': [
       {
@@ -753,6 +756,9 @@
           }
           {
             'include': '#language_variables'
+          }
+          {
+            'include': '#special_variables'
           }
           {
             'include': '#generic_names'
@@ -877,7 +883,7 @@
     'name': 'support.function.magic.serpent'
   'magic_variable_names':
     'comment': 'magic variables which a class/module may have.'
-    'match': '\\b__(tx\.origin|tx\.gas|tx\.gasprice|msg\.sender|msg\.value|\.balance|block\.coinbase|block\.timestamp|block\.prevhash|block\.difficulty|block\.number|block\.gaslimit)__\\b'
+    'match': '\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b'
     'name': 'support.variable.magic.serpent'
   'regular_expressions':
     'comment': 'Changed disabled to 1 to turn off syntax highlighting in “r” strings.'
