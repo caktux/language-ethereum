@@ -676,7 +676,7 @@
     'match': '(?x)\\b(\n\t\t\t\t(\n\t\t\t\t\tArithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|ChildProcess|\n\t\t\t\t\tConnection(Aborted|Refused|Reset)?|EOF|Environment|FileExists|\n\t\t\t\t\tFileNotFound|FloatingPoint|Interrupted|IO|IsADirectoryError|\n\t\t\t\t\tImport|Indentation|Index|Key|Lookup|Memory|Name|NotADirectory|\n\t\t\t\t\tNotImplemented|OS|Overflow|Permission|ProcessLookup|Reference|\n\t\t\t\t\tRuntime|Standard|Syntax|System|Tab|Timeout|Type|UnboundLocal|\n\t\t\t\t\tUnicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision\n\t\t\t\t)Error|\n\t\t\t\t((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|\n\t\t\t\t(Base)?Exception|\n\t\t\t\tSystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit\n\t\t\t)\\b'
     'name': 'support.type.exception.serpent'
   'builtin_functions':
-    'match': '(?x)\\b(\n\t\t\t\tarray|array_lit|call|send|fun|event|create|inset|import|log|min|max|len|ref|slice|ecrecover|sha256|ripemd160|sha3\n\t\t\t)\\b'
+    'match': '(?x)\\b(\n\t\t\t\tarray|array_lit|call|send|fun|event|create|inset|import|log|min|max|len|ref|slice|text|ecrecover|sha256|ripemd160|sha3\n\t\t\t)\\b'
     'name': 'support.function.builtin.serpent'
   'builtin_types':
     'match': '(?x)\\b(\n\t\t\t\tdata|extern|macro|str|arr|int\n\t\t\t)\\b'
@@ -685,7 +685,7 @@
     'match': '(?i:(%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?([hL][a-z]|[a-z%]))|(\\{([!\\[\\].:\\w ]+)?\\}))'
     'name': 'constant.other.placeholder.serpent'
   'special_variables':
-    'match': '(?x)\\b(\n\t\t\t\ttx\.origin|tx\.gas|tx\.gasprice|msg\.sender|msg\.value|\.balance|block\.coinbase|block\.timestamp|block\.prevhash|block\.difficulty|block\.number|block\.gaslimit\n\t\t\t)\\b'
+    'match': '(?x)\\b(\n\t\t\t\ttx\.origin|tx\.gasprice|msg\.gas|msg\.sender|msg\.value|\.balance|block\.coinbase|block\.timestamp|block\.prevhash|block\.difficulty|block\.number|block\.gaslimit\n\t\t\t)\\b'
     'name': 'support.type.variables.serpent'
   'docstrings':
     'patterns': [
