@@ -1,0 +1,12 @@
+@import "../../file-icons/styles/colors"; // to use the colours
+@import "../../file-icons/styles/icons";  // to use the defined icons
+@import "../../file-icons/styles/items";  // to use @pane-tab-selector
+
+@{pane-tab-selector}, .icon-file-text {
+  &[data-name$=".se"]          { .medium-purple;             } /* Colours icon and filename */
+  &[data-name$=".se"]:before   { .ruby-icon; .medium-purple; } /* Colours icon only */
+}
+@{pane-tab-selector}, .icon-file-text {
+  &[data-name$=".sol"]          { .medium-purple;             } /* Colours icon and filename */
+  &[data-name$=".sol"]:before   { .ruby-icon; .medium-purple; } /* Colours icon only */
+}
