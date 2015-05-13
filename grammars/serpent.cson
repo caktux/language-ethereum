@@ -25,6 +25,31 @@
     ]
   }
   {
+    'begin': '(^[ \\t]+)?(?=//)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.whitespace.comment.leading.serpent'
+    'end': '(?!\\G)'
+    'patterns': [
+      {
+        'begin': '#'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.serpent'
+        'end': '\\n'
+        'name': 'comment.line.number-sign.serpent'
+      }
+      {
+        'begin': '//'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.serpent'
+        'end': '\\n'
+        'name': 'comment.line.double-slash.serpent'
+      }
+    ]
+  }
+  {
     'match': '\\b(?i:(0x\\h*)L)'
     'name': 'constant.numeric.integer.long.hexadecimal.serpent'
   }
@@ -651,10 +676,10 @@
     'match': '(?x)\\b(\n\t\t\t\t(\n\t\t\t\t\tArithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|ChildProcess|\n\t\t\t\t\tConnection(Aborted|Refused|Reset)?|EOF|Environment|FileExists|\n\t\t\t\t\tFileNotFound|FloatingPoint|Interrupted|IO|IsADirectoryError|\n\t\t\t\t\tImport|Indentation|Index|Key|Lookup|Memory|Name|NotADirectory|\n\t\t\t\t\tNotImplemented|OS|Overflow|Permission|ProcessLookup|Reference|\n\t\t\t\t\tRuntime|Standard|Syntax|System|Tab|Timeout|Type|UnboundLocal|\n\t\t\t\t\tUnicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision\n\t\t\t\t)Error|\n\t\t\t\t((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|\n\t\t\t\t(Base)?Exception|\n\t\t\t\tSystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit\n\t\t\t)\\b'
     'name': 'support.type.exception.serpent'
   'builtin_functions':
-    'match': '(?x)\\b(\n\t\t\t\t__import__|all|abs|any|apply|ascii|bin|callable|chr|classmethod|cmp|coerce|\n\t\t\t\tcompile|delattr|dir|divmod|enumerate|eval|execfile|filter|format|getattr|\n\t\t\t\tglobals|hasattr|hash|help|hex|id|input|intern|isinstance|issubclass|iter|\n\t\t\t\tlen|locals|map|max|min|next|oct|open|ord|pow|print|property|range|\n\t\t\t\traw_input|reduce|reload|repr|reversed|round|setattr|sorted|staticmethod|\n\t\t\t\tsum|super|type|unichr|vars|zip\n\t\t\t)\\b'
+    'match': '(?x)\\b(\n\t\t\t\tarray|array_lit|call|send|fun|event|create|inset|import|log|min|max|len|ref|slice|ecrecover|sha256|ripemd160|sha3\n\t\t\t)\\b'
     'name': 'support.function.builtin.serpent'
   'builtin_types':
-    'match': '(?x)\\b(\n\t\t\t\tbasestring|bool|buffer|bytearray|bytes|complex|dict|float|frozenset|int|\n\t\t\t\tlist|long|memoryview|object|range|set|slice|str|tuple|unicode|xrange\n\t\t\t)\\b'
+    'match': '(?x)\\b(\n\t\t\t\tdata|extern|macro|str|arr|int\n\t\t\t)\\b'
     'name': 'support.type.serpent'
   'constant_placeholder':
     'match': '(?i:(%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?([hL][a-z]|[a-z%]))|(\\{([!\\[\\].:\\w ]+)?\\}))'
@@ -852,7 +877,7 @@
     'name': 'support.function.magic.serpent'
   'magic_variable_names':
     'comment': 'magic variables which a class/module may have.'
-    'match': '\\b__(all|annotations|bases|class|closure|code|debug|dict|doc|file|func|globals|kwdefaults|members|metaclass|methods|module|name|qualname|self|slots|weakref)__\\b'
+    'match': '\\b__(tx\.origin|tx\.gas|tx\.gasprice|msg\.sender|msg\.value|\.balance|block\.coinbase|block\.timestamp|block\.prevhash|block\.difficulty|block\.number|block\.gaslimit)__\\b'
     'name': 'support.variable.magic.serpent'
   'regular_expressions':
     'comment': 'Changed disabled to 1 to turn off syntax highlighting in “r” strings.'
