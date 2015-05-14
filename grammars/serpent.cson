@@ -761,6 +761,9 @@
             'include': '#special_variables'
           }
           {
+            'include': '#macro_variables'
+          }
+          {
             'include': '#generic_names'
           }
         ]
@@ -885,6 +888,9 @@
     'comment': 'magic variables which a class/module may have.'
     'match': '\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b'
     'name': 'support.variable.magic.serpent'
+  'macro_variables':
+    'match': '(?<=\\$)[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*'
+    'name': 'variable.interpolation.macro.serpent'
   'regular_expressions':
     'comment': 'Changed disabled to 1 to turn off syntax highlighting in “r” strings.'
     'disabled': 0
