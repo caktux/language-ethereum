@@ -687,6 +687,9 @@
   'special_variables':
     'match': '(?x)\\b(\n\t\t\t\ttx\.origin|tx\.gasprice|msg\.gas|msg\.sender|msg\.value|\.balance|block\.coinbase|block\.timestamp|block\.prevhash|block\.difficulty|block\.number|block\.gaslimit\n\t\t\t)\\b'
     'name': 'support.variable.special.serpent'
+  'any_method':
+    'match': '[A-Za-z_][A-Za-z0-9_]*(?=\\()'
+    'name': 'support.function.any-method.serpent'
   'docstrings':
     'patterns': [
       {
@@ -728,6 +731,9 @@
             'include': '#illegal_names'
           }
           {
+            'include': '#any_method'
+          }
+          {
             'include': '#generic_names'
           }
         ]
@@ -762,6 +768,9 @@
           }
           {
             'include': '#macro_variables'
+          }
+          {
+            'include': '#any_method'
           }
           {
             'include': '#generic_names'
