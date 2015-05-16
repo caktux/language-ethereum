@@ -100,46 +100,81 @@
   {
     'captures':
       '1':
-        'name': 'storage.modifier.global.serpent'
-    'match': '\\b(global)\\b'
+        'name': 'storage.modifier.extern.serpent'
+    'begin': '^(extern)\\s+\\w+\\:\\s*'
+    'end': '$'
+    'patterns': [
+      {
+        'captures':
+          '1':
+            'name': 'punctuation.definition.list.begin.serpent'
+          '2':
+            'name': 'support.function.extern.serpent'
+        'match': '(\\[|\\,\\s*)(\\w+)'
+      }
+      {
+        'begin': '\\:'
+        'end': '\\]'
+        'patterns': [
+          {
+            'captures':
+              '1':
+                'name': 'support.type.array.serpent'
+              '2':
+                'name': 'constant.numeric.integer.serpent'
+              '3':
+                'name': 'string.unquoted.language.serpent'
+            'match': '(a*)(i*)(s*)'
+          }
+        ]
+      }
+    ]
   }
+  # {
+  #   'captures':
+  #     '1':
+  #       'name': 'storage.modifier.global.serpent'
+  #   'match': '\\b(global)\\b'
+  # }
+  # {
+  #   'captures':
+  #     '1':
+  #       'name': 'storage.modifier.nonlocal.serpent'
+  #   'match': '\\b(nonlocal)\\b'
+  # }
   {
     'captures':
       '1':
-        'name': 'storage.modifier.nonlocal.serpent'
-    'match': '\\b(nonlocal)\\b'
-  }
-  {
-    'captures':
-      '1':
-        'name': 'keyword.control.import.serpent'
+        'name': 'keyword.control.data.serpent'
       '2':
-        'name': 'keyword.control.import.from.serpent'
-    'match': '\\b(?:(import)|(from))\\b'
+        'name': 'keyword.control.extern.serpent'
+      '3':
+        'name': 'keyword.control.macro.serpent'
+    'match': '\\b(?:(data)|(extern)|(macro))\\b'
   }
   {
     'comment': 'keywords that delimit flow conditionals'
     'name': 'keyword.control.conditional.serpent'
-    'match': '\\b(if|elif|else)\\b'
+    'match': '\\b(if|elif|else|unless)\\b'
   }
-  {
-    'comment': 'keywords that delimit an exception'
-    'name': 'keyword.control.exception.serpent'
-    'match': '\\b(except|finally|try|raise)\\b'
-  }
+  # {
+  #   'comment': 'keywords that delimit an exception'
+  #   'name': 'keyword.control.exception.serpent'
+  #   'match': '\\b(except|finally|try|raise)\\b'
+  # }
   {
     'comment': 'keywords that delimit loops'
     'name': 'keyword.control.repeat.serpent'
-    'match': '\\b(for|while)\\b'
+    'match': '\\b(until|while)\\b'
   }
   {
     'comment': 'keywords that alter flow from within a block'
     'name': 'keyword.control.statement.serpent'
-    'match': '\\b(with|break|continue|pass|return|stop|yield)\\b'
+    'match': '\\b(with|return|stop)\\b'
   }
   {
     'comment': 'keyword operators that evaluate to True or False'
-    'match': '\\b(and|in|is|not|or)\\b'
+    'match': '\\b(and|not|or)\\b'
     'name': 'keyword.operator.logical.serpent'
   }
   {
@@ -147,7 +182,7 @@
       '1':
         'name': 'keyword.other.serpent'
     'comment': 'keywords that haven\'t fit into other groups (yet).'
-    'match': '\\b(as|assert|del|exec|print)\\b'
+    'match': '\\b(as|assert)\\b'
   }
   {
     'match': '<>'
@@ -169,98 +204,98 @@
     'match': '\\='
     'name': 'keyword.operator.assignment.serpent'
   }
-  {
-    'begin': '^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\:)'
-    'beginCaptures':
-      '1':
-        'name': 'storage.type.class.serpent'
-    'contentName': 'entity.name.type.class.serpent'
-    'end': '\\s*(:)'
-    'endCaptures':
-      '1':
-        'name': 'punctuation.section.class.begin.serpent'
-    'name': 'meta.class.old-style.serpent'
-    'patterns': [
-      {
-        'include': '#entity_name_class'
-      }
-    ]
-  }
-  {
-    'begin': '^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\()'
-    'beginCaptures':
-      '1':
-        'name': 'storage.type.class.serpent'
-    'end': '(\\))\\s*(?:(\\:)|(.*$\\n?))'
-    'endCaptures':
-      '1':
-        'name': 'punctuation.definition.inheritance.end.serpent'
-      '2':
-        'name': 'punctuation.section.class.begin.serpent'
-      '3':
-        'name': 'invalid.illegal.missing-section-begin.serpent'
-    'name': 'meta.class.serpent'
-    'patterns': [
-      {
-        'begin': '(?=[A-Za-z_][A-Za-z0-9_]*)'
-        'contentName': 'entity.name.type.class.serpent'
-        'end': '(?![A-Za-z0-9_])'
-        'patterns': [
-          {
-            'include': '#entity_name_class'
-          }
-        ]
-      }
-      {
-        'begin': '(\\()'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.inheritance.begin.serpent'
-        'contentName': 'meta.class.inheritance.serpent'
-        'end': '(?=\\)|:)'
-        'patterns': [
-          {
-            'begin': '(?<=\\(|,)\\s*'
-            'contentName': 'entity.other.inherited-class.serpent'
-            'end': '\\s*(?:(,)|(?=\\)))'
-            'endCaptures':
-              '1':
-                'name': 'punctuation.separator.inheritance.serpent'
-            'patterns': [
-              {
-                'include': '$self'
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-  {
-    'begin': '^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9])'
-    'beginCaptures':
-      '1':
-        'name': 'storage.type.class.serpent'
-    'end': '(\\()|(\\s*$\\n?|#.*$\\n?)'
-    'endCaptures':
-      '1':
-        'name': 'punctuation.definition.inheritance.begin.serpent'
-      '2':
-        'name': 'invalid.illegal.missing-inheritance.serpent'
-    'name': 'meta.class.serpent'
-    'patterns': [
-      {
-        'begin': '(?=[A-Za-z_][A-Za-z0-9_]*)'
-        'contentName': 'entity.name.type.class.serpent'
-        'end': '(?![A-Za-z0-9_])'
-        'patterns': [
-          {
-            'include': '#entity_name_function'
-          }
-        ]
-      }
-    ]
-  }
+  # {
+  #   'begin': '^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\:)'
+  #   'beginCaptures':
+  #     '1':
+  #       'name': 'storage.type.class.serpent'
+  #   'contentName': 'entity.name.type.class.serpent'
+  #   'end': '\\s*(:)'
+  #   'endCaptures':
+  #     '1':
+  #       'name': 'punctuation.section.class.begin.serpent'
+  #   'name': 'meta.class.old-style.serpent'
+  #   'patterns': [
+  #     {
+  #       'include': '#entity_name_class'
+  #     }
+  #   ]
+  # }
+  # {
+  #   'begin': '^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\()'
+  #   'beginCaptures':
+  #     '1':
+  #       'name': 'storage.type.class.serpent'
+  #   'end': '(\\))\\s*(?:(\\:)|(.*$\\n?))'
+  #   'endCaptures':
+  #     '1':
+  #       'name': 'punctuation.definition.inheritance.end.serpent'
+  #     '2':
+  #       'name': 'punctuation.section.class.begin.serpent'
+  #     '3':
+  #       'name': 'invalid.illegal.missing-section-begin.serpent'
+  #   'name': 'meta.class.serpent'
+  #   'patterns': [
+  #     {
+  #       'begin': '(?=[A-Za-z_][A-Za-z0-9_]*)'
+  #       'contentName': 'entity.name.type.class.serpent'
+  #       'end': '(?![A-Za-z0-9_])'
+  #       'patterns': [
+  #         {
+  #           'include': '#entity_name_class'
+  #         }
+  #       ]
+  #     }
+  #     {
+  #       'begin': '(\\()'
+  #       'beginCaptures':
+  #         '1':
+  #           'name': 'punctuation.definition.inheritance.begin.serpent'
+  #       'contentName': 'meta.class.inheritance.serpent'
+  #       'end': '(?=\\)|:)'
+  #       'patterns': [
+  #         {
+  #           'begin': '(?<=\\(|,)\\s*'
+  #           'contentName': 'entity.other.inherited-class.serpent'
+  #           'end': '\\s*(?:(,)|(?=\\)))'
+  #           'endCaptures':
+  #             '1':
+  #               'name': 'punctuation.separator.inheritance.serpent'
+  #           'patterns': [
+  #             {
+  #               'include': '$self'
+  #             }
+  #           ]
+  #         }
+  #       ]
+  #     }
+  #   ]
+  # }
+  # {
+  #   'begin': '^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9])'
+  #   'beginCaptures':
+  #     '1':
+  #       'name': 'storage.type.class.serpent'
+  #   'end': '(\\()|(\\s*$\\n?|#.*$\\n?)'
+  #   'endCaptures':
+  #     '1':
+  #       'name': 'punctuation.definition.inheritance.begin.serpent'
+  #     '2':
+  #       'name': 'invalid.illegal.missing-inheritance.serpent'
+  #   'name': 'meta.class.serpent'
+  #   'patterns': [
+  #     {
+  #       'begin': '(?=[A-Za-z_][A-Za-z0-9_]*)'
+  #       'contentName': 'entity.name.type.class.serpent'
+  #       'end': '(?![A-Za-z0-9_])'
+  #       'patterns': [
+  #         {
+  #           'include': '#entity_name_function'
+  #         }
+  #       ]
+  #     }
+  #   ]
+  # }
   {
     'begin': '^\\s*(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()'
     'beginCaptures':
@@ -334,101 +369,101 @@
       }
     ]
   }
-  {
-    'begin': '(lambda)(?=\\s+)'
-    'beginCaptures':
-      '1':
-        'name': 'storage.type.function.inline.serpent'
-    'end': '(\\:)'
-    'endCaptures':
-      '1':
-        'name': 'punctuation.definition.parameters.end.serpent'
-      '2':
-        'name': 'punctuation.section.function.begin.serpent'
-      '3':
-        'name': 'invalid.illegal.missing-section-begin.serpent'
-    'name': 'meta.function.inline.serpent'
-    'patterns': [
-      {
-        'begin': '\\s+'
-        'contentName': 'meta.function.inline.parameters.serpent'
-        'end': '(?=\\:)'
-        'patterns': [
-          {
-            'include': '#keyword_arguments'
-          }
-          {
-            'captures':
-              '1':
-                'name': 'variable.parameter.function.serpent'
-              '2':
-                'name': 'punctuation.separator.parameters.serpent'
-            'match': '\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)\\:]))'
-          }
-        ]
-      }
-    ]
-  }
-  {
-    'begin': '^\\s*(?=@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*\\s*\\()'
-    'comment': 'a decorator may be a function call which returns a decorator.'
-    'end': '(\\))'
-    'endCaptures':
-      '1':
-        'name': 'punctuation.definition.arguments.end.serpent'
-    'name': 'meta.function.decorator.serpent'
-    'patterns': [
-      {
-        'begin': '(?=(@)\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*\\s*\\()'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.decorator.serpent'
-        'contentName': 'entity.name.function.decorator.serpent'
-        'end': '(?=\\s*\\()'
-        'patterns': [
-          {
-            'include': '#dotted_name'
-          }
-        ]
-      }
-      {
-        'begin': '(\\()'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.arguments.begin.serpent'
-        'contentName': 'meta.function.decorator.arguments.serpent'
-        'end': '(?=\\))'
-        'patterns': [
-          {
-            'include': '#keyword_arguments'
-          }
-          {
-            'include': '$self'
-          }
-        ]
-      }
-    ]
-  }
-  {
-    'begin': '^\\s*(?=@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*)'
-    'contentName': 'entity.name.function.decorator.serpent'
-    'end': '(?=\\s|$\\n?|#)'
-    'name': 'meta.function.decorator.serpent'
-    'patterns': [
-      {
-        'begin': '(?=(@)\\s*[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*)'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.decorator.serpent'
-        'end': '(?=\\s|$\\n?|#)'
-        'patterns': [
-          {
-            'include': '#dotted_name'
-          }
-        ]
-      }
-    ]
-  }
+  # {
+  #   'begin': '(lambda)(?=\\s+)'
+  #   'beginCaptures':
+  #     '1':
+  #       'name': 'storage.type.function.inline.serpent'
+  #   'end': '(\\:)'
+  #   'endCaptures':
+  #     '1':
+  #       'name': 'punctuation.definition.parameters.end.serpent'
+  #     '2':
+  #       'name': 'punctuation.section.function.begin.serpent'
+  #     '3':
+  #       'name': 'invalid.illegal.missing-section-begin.serpent'
+  #   'name': 'meta.function.inline.serpent'
+  #   'patterns': [
+  #     {
+  #       'begin': '\\s+'
+  #       'contentName': 'meta.function.inline.parameters.serpent'
+  #       'end': '(?=\\:)'
+  #       'patterns': [
+  #         {
+  #           'include': '#keyword_arguments'
+  #         }
+  #         {
+  #           'captures':
+  #             '1':
+  #               'name': 'variable.parameter.function.serpent'
+  #             '2':
+  #               'name': 'punctuation.separator.parameters.serpent'
+  #           'match': '\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)\\:]))'
+  #         }
+  #       ]
+  #     }
+  #   ]
+  # }
+  # {
+  #   'begin': '^\\s*(?=@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*\\s*\\()'
+  #   'comment': 'a decorator may be a function call which returns a decorator.'
+  #   'end': '(\\))'
+  #   'endCaptures':
+  #     '1':
+  #       'name': 'punctuation.definition.arguments.end.serpent'
+  #   'name': 'meta.function.decorator.serpent'
+  #   'patterns': [
+  #     {
+  #       'begin': '(?=(@)\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*\\s*\\()'
+  #       'beginCaptures':
+  #         '1':
+  #           'name': 'punctuation.definition.decorator.serpent'
+  #       'contentName': 'entity.name.function.decorator.serpent'
+  #       'end': '(?=\\s*\\()'
+  #       'patterns': [
+  #         {
+  #           'include': '#dotted_name'
+  #         }
+  #       ]
+  #     }
+  #     {
+  #       'begin': '(\\()'
+  #       'beginCaptures':
+  #         '1':
+  #           'name': 'punctuation.definition.arguments.begin.serpent'
+  #       'contentName': 'meta.function.decorator.arguments.serpent'
+  #       'end': '(?=\\))'
+  #       'patterns': [
+  #         {
+  #           'include': '#keyword_arguments'
+  #         }
+  #         {
+  #           'include': '$self'
+  #         }
+  #       ]
+  #     }
+  #   ]
+  # }
+  # {
+  #   'begin': '^\\s*(?=@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*)'
+  #   'contentName': 'entity.name.function.decorator.serpent'
+  #   'end': '(?=\\s|$\\n?|#)'
+  #   'name': 'meta.function.decorator.serpent'
+  #   'patterns': [
+  #     {
+  #       'begin': '(?=(@)\\s*[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*)'
+  #       'beginCaptures':
+  #         '1':
+  #           'name': 'punctuation.definition.decorator.serpent'
+  #       'end': '(?=\\s|$\\n?|#)'
+  #       'patterns': [
+  #         {
+  #           'include': '#dotted_name'
+  #         }
+  #       ]
+  #     }
+  #   ]
+  # }
   {
     'begin': '(?<=\\)|\\])\\s*(\\()'
     'beginCaptures':
@@ -537,24 +572,24 @@
     'captures':
       '1':
         'name': 'storage.type.function.serpent'
-    'match': '\\b(def|lambda)\\b'
+    'match': '\\b(def)\\b'
   }
-  {
-    'captures':
-      '1':
-        'name': 'storage.type.class.serpent'
-    'match': '\\b(class)\\b'
-  }
+  # {
+  #   'captures':
+  #     '1':
+  #       'name': 'storage.type.class.serpent'
+  #   'match': '\\b(class)\\b'
+  # }
   {
     'include': '#line_continuation'
   }
   {
     'include': '#language_variables'
   }
-  {
-    'match': '\\b(None|True|False|Ellipsis|NotImplemented)\\b'
-    'name': 'constant.language.serpent'
-  }
+  # {
+  #   'match': '\\b(None|True|False|Ellipsis|NotImplemented)\\b'
+  #   'name': 'constant.language.serpent'
+  # }
   {
     'include': '#string_quoted_single'
   }
@@ -609,77 +644,77 @@
       }
     ]
   }
-  {
-    'captures':
-      '1':
-        'name': 'punctuation.definition.tuple.begin.serpent'
-      '2':
-        'name': 'meta.empty-tuple.serpent'
-      '3':
-        'name': 'punctuation.definition.tuple.end.serpent'
-    'match': '(\\()(\\s*(\\)))'
-    'name': 'meta.structure.tuple.serpent'
-  }
-  {
-    'captures':
-      '1':
-        'name': 'punctuation.definition.dictionary.begin.serpent'
-      '2':
-        'name': 'meta.empty-dictionary.serpent'
-      '3':
-        'name': 'punctuation.definition.dictionary.end.serpent'
-    'match': '(\\{)(\\s*(\\}))'
-    'name': 'meta.structure.dictionary.serpent'
-  }
-  {
-    'begin': '(\\{)'
-    'beginCaptures':
-      '1':
-        'name': 'punctuation.definition.dictionary.begin.serpent'
-    'end': '(\\})'
-    'endCaptures':
-      '1':
-        'name': 'punctuation.definition.dictionary.end.serpent'
-    'name': 'meta.structure.dictionary.serpent'
-    'patterns': [
-      {
-        'begin': '(?<=\\{|\\,|^)\\s*(?![\\},])'
-        'contentName': 'meta.structure.dictionary.key.serpent'
-        'end': '\\s*(?:(?=\\})|(\\:))'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.separator.valuepair.dictionary.serpent'
-        'patterns': [
-          {
-            'include': '$self'
-          }
-        ]
-      }
-      {
-        'begin': '(?<=\\:|^)\\s*'
-        'contentName': 'meta.structure.dictionary.value.serpent'
-        'end': '\\s*(?:(?=\\})|(,))'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.separator.dictionary.serpent'
-        'patterns': [
-          {
-            'include': '$self'
-          }
-        ]
-      }
-    ]
-  }
+  # {
+  #   'captures':
+  #     '1':
+  #       'name': 'punctuation.definition.tuple.begin.serpent'
+  #     '2':
+  #       'name': 'meta.empty-tuple.serpent'
+  #     '3':
+  #       'name': 'punctuation.definition.tuple.end.serpent'
+  #   'match': '(\\()(\\s*(\\)))'
+  #   'name': 'meta.structure.tuple.serpent'
+  # }
+  # {
+  #   'captures':
+  #     '1':
+  #       'name': 'punctuation.definition.dictionary.begin.serpent'
+  #     '2':
+  #       'name': 'meta.empty-dictionary.serpent'
+  #     '3':
+  #       'name': 'punctuation.definition.dictionary.end.serpent'
+  #   'match': '(\\{)(\\s*(\\}))'
+  #   'name': 'meta.structure.dictionary.serpent'
+  # }
+  # {
+  #   'begin': '(\\{)'
+  #   'beginCaptures':
+  #     '1':
+  #       'name': 'punctuation.definition.dictionary.begin.serpent'
+  #   'end': '(\\})'
+  #   'endCaptures':
+  #     '1':
+  #       'name': 'punctuation.definition.dictionary.end.serpent'
+  #   'name': 'meta.structure.dictionary.serpent'
+  #   'patterns': [
+  #     {
+  #       'begin': '(?<=\\{|\\,|^)\\s*(?![\\},])'
+  #       'contentName': 'meta.structure.dictionary.key.serpent'
+  #       'end': '\\s*(?:(?=\\})|(\\:))'
+  #       'endCaptures':
+  #         '1':
+  #           'name': 'punctuation.separator.valuepair.dictionary.serpent'
+  #       'patterns': [
+  #         {
+  #           'include': '$self'
+  #         }
+  #       ]
+  #     }
+  #     {
+  #       'begin': '(?<=\\:|^)\\s*'
+  #       'contentName': 'meta.structure.dictionary.value.serpent'
+  #       'end': '\\s*(?:(?=\\})|(,))'
+  #       'endCaptures':
+  #         '1':
+  #           'name': 'punctuation.separator.dictionary.serpent'
+  #       'patterns': [
+  #         {
+  #           'include': '$self'
+  #         }
+  #       ]
+  #     }
+  #   ]
+  # }
 ]
 'repository':
-  'builtin_exceptions':
-    'match': '(?x)\\b(\n\t\t\t\t(\n\t\t\t\t\tArithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|ChildProcess|\n\t\t\t\t\tConnection(Aborted|Refused|Reset)?|EOF|Environment|FileExists|\n\t\t\t\t\tFileNotFound|FloatingPoint|Interrupted|IO|IsADirectoryError|\n\t\t\t\t\tImport|Indentation|Index|Key|Lookup|Memory|Name|NotADirectory|\n\t\t\t\t\tNotImplemented|OS|Overflow|Permission|ProcessLookup|Reference|\n\t\t\t\t\tRuntime|Standard|Syntax|System|Tab|Timeout|Type|UnboundLocal|\n\t\t\t\t\tUnicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision\n\t\t\t\t)Error|\n\t\t\t\t((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|\n\t\t\t\t(Base)?Exception|\n\t\t\t\tSystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit\n\t\t\t)\\b'
-    'name': 'support.type.exception.serpent'
+  # 'builtin_exceptions':
+  #   'match': '(?x)\\b(\n\t\t\t\t(\n\t\t\t\t\tArithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|ChildProcess|\n\t\t\t\t\tConnection(Aborted|Refused|Reset)?|EOF|Environment|FileExists|\n\t\t\t\t\tFileNotFound|FloatingPoint|Interrupted|IO|IsADirectoryError|\n\t\t\t\t\tImport|Indentation|Index|Key|Lookup|Memory|Name|NotADirectory|\n\t\t\t\t\tNotImplemented|OS|Overflow|Permission|ProcessLookup|Reference|\n\t\t\t\t\tRuntime|Standard|Syntax|System|Tab|Timeout|Type|UnboundLocal|\n\t\t\t\t\tUnicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision\n\t\t\t\t)Error|\n\t\t\t\t((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|\n\t\t\t\t(Base)?Exception|\n\t\t\t\tSystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit\n\t\t\t)\\b'
+  #   'name': 'support.type.exception.serpent'
   'builtin_functions':
-    'match': '(?x)\\b(\n\t\t\t\tarray|array_lit|call|send|fun|event|create|inset|import|mcopy|log|save|load|min|max|len|get|set|ref|getch|setch|slice|text|suicide|ecrecover|sha256|ripemd160|sha3\n\t\t\t)\\b'
+    'match': '(?x)\\b(\n\t\t\t\talloc|array|array_lit|call|callcode|create|declare|fun|get|getch|inset|import|len|load|log|mcopy|min|max|outer|ref|send|save|set|setch|seq|slice|text|suicide|ecrecover|sha256|ripemd160|sha3\n\t\t\t)\\b'
     'name': 'support.function.builtin.serpent'
   'builtin_types':
-    'match': '(?x)\\b(\n\t\t\t\tdata|extern|macro|str|arr|int\n\t\t\t)\\b'
+    'match': '(?x)\\b(\n\t\t\t\tarr|bytes|chars|int|items|str|string|words\n\t\t\t)\\b'
     'name': 'support.type.serpent'
   'constant_placeholder':
     'match': '(?i:(%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?([hL][a-z]|[a-z%]))|(\\{([!\\[\\].:\\w ]+)?\\}))'
@@ -721,12 +756,12 @@
         'begin': '(\\.)(?=[A-Za-z_][A-Za-z0-9_]*)'
         'end': '(?![A-Za-z0-9_])'
         'patterns': [
-          {
-            'include': '#magic_function_names'
-          }
-          {
-            'include': '#magic_variable_names'
-          }
+          # {
+          #   'include': '#magic_function_names'
+          # }
+          # {
+          #   'include': '#magic_variable_names'
+          # }
           {
             'include': '#illegal_names'
           }
@@ -754,12 +789,12 @@
           {
             'include': '#illegal_names'
           }
-          {
-            'include': '#magic_function_names'
-          }
-          {
-            'include': '#magic_variable_names'
-          }
+          # {
+          #   'include': '#magic_function_names'
+          # }
+          # {
+          #   'include': '#magic_variable_names'
+          # }
           {
             'include': '#language_variables'
           }
@@ -789,9 +824,9 @@
     ]
   'entity_name_function':
     'patterns': [
-      {
-        'include': '#magic_function_names'
-      }
+      # {
+      #   'include': '#magic_function_names'
+      # }
       {
         'include': '#illegal_names'
       }
@@ -839,12 +874,12 @@
     'match': '(\\\\U[0-9A-Fa-f]{8})|(\\\\u[0-9A-Fa-f]{4})|(\\\\N\\{[a-zA-Z ]+\\})'
   'function_name':
     'patterns': [
-      {
-        'include': '#magic_function_names'
-      }
-      {
-        'include': '#magic_variable_names'
-      }
+      # {
+      #   'include': '#magic_function_names'
+      # }
+      # {
+      #   'include': '#magic_variable_names'
+      # }
       {
         'include': '#builtin_exceptions'
       }
@@ -861,7 +896,7 @@
   'generic_names':
     'match': '[A-Za-z_][A-Za-z0-9_]*'
   'illegal_names':
-    'match': '\\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|print|raise|return|stop|try|while|with|yield|array|array_lit|call|send|fun|event|create|inset|import|mcopy|log|save|load|min|max|len|get|set|ref|getch|setch|slice|text|suicide|ecrecover|sha256|ripemd160|sha3)\\b'
+    'match': '\\b(and|assert|data|def|elif|else|extern|if|macro|not|or|return|stop|unless|while|with|alloc|array|array_lit|call|callcode|create|declare|fun|get|getch|inset|import|len|load|log|mcopy|min|max|outer|ref|send|save|set|setch|seq|slice|text|suicide|ecrecover|sha256|ripemd160|sha3)\\b'
     'name': 'invalid.illegal.name.serpent'
   'keyword_arguments':
     'begin': '\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)(?!=)'
@@ -880,7 +915,7 @@
       }
     ]
   'language_variables':
-    'match': '\\b(self|cls)\\b'
+    'match': '\\b(self)\\b'
     'name': 'variable.language.serpent'
   'line_continuation':
     'captures':
@@ -889,14 +924,14 @@
       '2':
         'name': 'invalid.illegal.unexpected-text.serpent'
     'match': '(\\\\)(.*)$\\n?'
-  'magic_function_names':
-    'comment': 'these methods have magic interpretation by serpent and are generally called indirectly through syntactic constructs'
-    'match': '(?x)\\b(__(?:abs|add|and|bool|bytes|call|cmp|coerce|complex|contains|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floordiv|format|ge|get|getattr|getattribute|getitem|getslice|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imatmul|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|length_hint|long|lshift|lt|matmul|missing|mod|mul|ne|neg|next|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|repr|reversed|rfloordiv|rlshift|rmatmul|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|str|sub|subclasscheck|truediv|unicode|xor)__)\\b'
-    'name': 'support.function.magic.serpent'
-  'magic_variable_names':
-    'comment': 'magic variables which a class/module may have.'
-    'match': '\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b'
-    'name': 'support.variable.magic.serpent'
+  # 'magic_function_names':
+  #   'comment': 'these methods have magic interpretation by serpent and are generally called indirectly through syntactic constructs'
+  #   'match': '(?x)\\b(__(?:abs|add|and|bool|bytes|call|cmp|coerce|complex|contains|del|delattr|delete|delitem|delslice|dir|div|divmod|enter|eq|exit|float|floordiv|format|ge|get|getattr|getattribute|getitem|getslice|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imatmul|imod|imul|index|init|instancecheck|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|length_hint|long|lshift|lt|matmul|missing|mod|mul|ne|neg|next|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|repr|reversed|rfloordiv|rlshift|rmatmul|rmod|rmul|ror|round|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|str|sub|subclasscheck|truediv|unicode|xor)__)\\b'
+  #   'name': 'support.function.magic.serpent'
+  # 'magic_variable_names':
+  #   'comment': 'magic variables which a class/module may have.'
+  #   'match': '\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b'
+  #   'name': 'support.variable.magic.serpent'
   'macro_variables':
     'match': '(?<=\\$)[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*'
     'name': 'variable.interpolation.macro.serpent'
@@ -1166,58 +1201,58 @@
           }
         ]
       }
-      {
-        'begin': '(""")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.serpent'
-        'comment': 'double quoted string'
-        'end': '((?<=""")(")""|""")'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.serpent'
-          '2':
-            'name': 'meta.empty-string.double.serpent'
-        'name': 'string.quoted.double.block.sql.serpent'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': 'source.sql'
-          }
-        ]
-      }
-      {
-        'begin': '(")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.serpent'
-        'comment': 'double quoted string'
-        'end': '((?<=")(")|")|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.serpent'
-          '2':
-            'name': 'meta.empty-string.double.serpent'
-          '3':
-            'name': 'invalid.illegal.unclosed-string.serpent'
-        'name': 'string.quoted.double.single-line.sql.serpent'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': 'source.sql'
-          }
-        ]
-      }
+      # {
+      #   'begin': '(""")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))'
+      #   'beginCaptures':
+      #     '1':
+      #       'name': 'punctuation.definition.string.begin.serpent'
+      #   'comment': 'double quoted string'
+      #   'end': '((?<=""")(")""|""")'
+      #   'endCaptures':
+      #     '1':
+      #       'name': 'punctuation.definition.string.end.serpent'
+      #     '2':
+      #       'name': 'meta.empty-string.double.serpent'
+      #   'name': 'string.quoted.double.block.sql.serpent'
+      #   'patterns': [
+      #     {
+      #       'include': '#constant_placeholder'
+      #     }
+      #     {
+      #       'include': '#escaped_char'
+      #     }
+      #     {
+      #       'include': 'source.sql'
+      #     }
+      #   ]
+      # }
+      # {
+      #   'begin': '(")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))'
+      #   'beginCaptures':
+      #     '1':
+      #       'name': 'punctuation.definition.string.begin.serpent'
+      #   'comment': 'double quoted string'
+      #   'end': '((?<=")(")|")|(\\n)'
+      #   'endCaptures':
+      #     '1':
+      #       'name': 'punctuation.definition.string.end.serpent'
+      #     '2':
+      #       'name': 'meta.empty-string.double.serpent'
+      #     '3':
+      #       'name': 'invalid.illegal.unclosed-string.serpent'
+      #   'name': 'string.quoted.double.single-line.sql.serpent'
+      #   'patterns': [
+      #     {
+      #       'include': '#constant_placeholder'
+      #     }
+      #     {
+      #       'include': '#escaped_char'
+      #     }
+      #     {
+      #       'include': 'source.sql'
+      #     }
+      #   ]
+      # }
       {
         'begin': '(""")'
         'beginCaptures':
@@ -1528,56 +1563,56 @@
           }
         ]
       }
-      {
-        'begin': '(\'\'\')(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.serpent'
-        'comment': 'single quoted string'
-        'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.serpent'
-          '2':
-            'name': 'meta.empty-string.single.serpent'
-        'name': 'string.quoted.single.block.serpent'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': 'source.sql'
-          }
-        ]
-      }
-      {
-        'begin': '(\')(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.serpent'
-        'comment': 'single quoted string'
-        'end': '(\')|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.serpent'
-          '2':
-            'name': 'invalid.illegal.unclosed-string.serpent'
-        'name': 'string.quoted.single.single-line.serpent'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': 'source.sql'
-          }
-        ]
-      }
+      # {
+      #   'begin': '(\'\'\')(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))'
+      #   'beginCaptures':
+      #     '1':
+      #       'name': 'punctuation.definition.string.begin.serpent'
+      #   'comment': 'single quoted string'
+      #   'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
+      #   'endCaptures':
+      #     '1':
+      #       'name': 'punctuation.definition.string.end.serpent'
+      #     '2':
+      #       'name': 'meta.empty-string.single.serpent'
+      #   'name': 'string.quoted.single.block.serpent'
+      #   'patterns': [
+      #     {
+      #       'include': '#constant_placeholder'
+      #     }
+      #     {
+      #       'include': '#escaped_char'
+      #     }
+      #     {
+      #       'include': 'source.sql'
+      #     }
+      #   ]
+      # }
+      # {
+      #   'begin': '(\')(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))'
+      #   'beginCaptures':
+      #     '1':
+      #       'name': 'punctuation.definition.string.begin.serpent'
+      #   'comment': 'single quoted string'
+      #   'end': '(\')|(\\n)'
+      #   'endCaptures':
+      #     '1':
+      #       'name': 'punctuation.definition.string.end.serpent'
+      #     '2':
+      #       'name': 'invalid.illegal.unclosed-string.serpent'
+      #   'name': 'string.quoted.single.single-line.serpent'
+      #   'patterns': [
+      #     {
+      #       'include': '#constant_placeholder'
+      #     }
+      #     {
+      #       'include': '#escaped_char'
+      #     }
+      #     {
+      #       'include': 'source.sql'
+      #     }
+      #   ]
+      # }
       {
         'begin': '(\'\'\')'
         'beginCaptures':
