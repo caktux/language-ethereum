@@ -5,5 +5,7 @@ Adds syntax highlighting and snippets to Solidity and Serpent files in Atom.
 Solidity support [converted](https://discuss.atom.io/t/convert-sublime-grammar-to-atom-grammar/14843)
 from the [Ethereum Sublime package](https://packagecontrol.io/packages/Ethereum).
 
+![screenshot](https://cloud.githubusercontent.com/assets/13692/7668149/adef76ae-fbf6-11e4-85b8-41ead5c53320.png)
+
 Contributions are greatly appreciated. Please fork this repository and open a
 pull request to add snippets, make grammar tweaks, etc.
