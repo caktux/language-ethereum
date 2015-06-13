@@ -4,6 +4,7 @@
   'se'
   'ser'
   'serpent'
+  'sm'
 ]
 'firstLineMatch': '^#!/.*\\bserpent[\\d\\.]*\\b'
 'patterns': [
