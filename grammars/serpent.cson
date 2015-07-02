@@ -111,23 +111,25 @@
             'name': 'punctuation.definition.list.begin.serpent'
           '2':
             'name': 'support.function.extern.serpent'
-        'match': '(\\[|\\,\\s*)(\\w+)'
+        'match': '(\\[\\s*)(\\w+)\\:\\['
       }
       {
-        'begin': '\\:'
-        'end': '\\]'
-        'patterns': [
-          {
-            'captures':
-              '1':
-                'name': 'support.type.array.serpent'
-              '2':
-                'name': 'constant.numeric.integer.serpent'
-              '3':
-                'name': 'string.unquoted.language.serpent'
-            'match': '(a*)(i*)(s*)'
-          }
-        ]
+        'captures':
+          '1':
+            'name': 'support.type.array.serpent'
+        'match': '(int256\\[\\])'
+      }
+      {
+        'captures':
+          '1':
+            'name': 'constant.numeric.integer.serpent'
+        'match': '(int256)'
+      }
+      {
+        'captures':
+          '1':
+            'name': 'string.unquoted.language.serpent'
+        'match': '(bytes)'
       }
     ]
   }
