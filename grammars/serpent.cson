@@ -133,6 +133,21 @@
       }
     ]
   }
+  {
+    'captures':
+      '1':
+        'name': 'storage.modifier.event.serpent'
+    'begin': '^(event)\\s+\\w+\\('
+    'end': '$'
+    'patterns': [
+      {
+        'captures':
+          '1':
+            'name': 'support.type.indexed.serpent'
+        'match': '\\:(indexed)'
+      }
+    ]
+  }
   # {
   #   'captures':
   #     '1':

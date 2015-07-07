@@ -50,12 +50,6 @@
   'return array':
     'prefix': 'return'
     'body': 'return([${1:array}], items=${2:count})$0'
-  'array type':
-    'prefix': ':a'
-    'body': ':arr'
-  'string type':
-    'prefix': ':s'
-    'body': ':str'
   'array':
     'prefix': 'array'
     'body': 'array(${1:size})$0'
