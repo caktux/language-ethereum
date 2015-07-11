@@ -10,7 +10,7 @@
     'body': 'data ${1:name}[](fields)$0'
   'extern':
     'prefix': 'extern'
-    'body': 'extern ${1:name}: [${2:method}:[${3:inputs}]:${4:output}]$0'
+    'body': 'extern ${1:name}: [${2:method}:[${3:int256,int256[],bytes}]:${4:int256}]$0'
   'event':
     'prefix': 'event'
     'body': 'event ${1:name}(${2:key}:indexed, values)$0'
