@@ -111,7 +111,7 @@
             'name': 'punctuation.definition.list.begin.serpent'
           '2':
             'name': 'support.function.extern.serpent'
-        'match': '(\\[\\s*)(\\w+)\\:\\['
+        'match': '(\\[|,)\\s*(\\w+)\\:\\['
       }
       {
         'captures':
