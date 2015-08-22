@@ -103,7 +103,7 @@
       '1':
         'name': 'storage.modifier.extern.serpent'
     'begin': '^(extern)\\s+\\w+\\:\\s*'
-    'end': '$'
+    'end': '((?=#)|(?=//)|(?=\n))'
     'patterns': [
       {
         'captures':
@@ -138,7 +138,7 @@
       '1':
         'name': 'storage.modifier.event.serpent'
     'begin': '^(event)\\s+\\w+\\('
-    'end': '$'
+    'end': '((?=#)|(?=//)|(?=\n))'
     'patterns': [
       {
         'captures':
