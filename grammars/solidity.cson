@@ -30,7 +30,7 @@
       "2":
         name: "variable.parameter"
     comment: "Built-in types"
-    match: "\\b(address|string\\d*|bytes\\d*|int\\d*|uint\\d*|bool|hash\\d*)(?:\\s+(?:indexed\\s+)?([A-Za-z_][A-Za-z0-9_]*)\\s*[,\\)])?"
+    match: "\\b(address|string\\d*|bytes\\d*|int\\d*|uint\\d*|bool|hash\\d*)(?:\\s+(?:indexed\\s+)?([A-Za-z_][A-Za-z0-9_]*)\\s*[,\\)])?\\b"
   }
   {
     captures:
@@ -43,7 +43,7 @@
       "4":
         name: "keyword.control"
     comment: "Mapping definition"
-    match: "\\b(mapping)\\s*\\((.*)\\s+=>\\s+(.*)\\)(\\s+(?:private|public|external|inherited))?\\s+([A-Za-z_][A-Za-z0-9_]*)\\b"
+    match: "\\b(mapping)\\s*\\((.*)\\s+=>\\s+(.*)\\)(\\s+(?:private|public|internal|external|inherited))?\\s+([A-Za-z_][A-Za-z0-9_]*)\\b"
   }
   {
     comment: "True and false keywords"
@@ -51,8 +51,8 @@
     name: "constant.language"
   }
   {
-    comment: "Langauge keywords"
-    match: "\\b(var|import|function|constant|if|else|for|while|do|break|continue|returns?|private|public|external|inherited|this|suicide|new|is|\\_)\\b"
+    comment: "Language keywords"
+    match: "\\b(var|import|function|constant|if|else|for|while|do|break|continue|returns?|private|public|internal|external|inherited|this|suicide|new|is|\\_)\\b"
     name: "keyword.control"
   }
   {
@@ -62,7 +62,7 @@
       "2":
         name: "keyword.control"
     comment: "Variable definitions"
-    match: "\\b([A-Za-z_][A-Za-z0-9_]+)(\\s+(?:private|public|external|inherited))?\\s+([A-Za-z_][A-Za-z0-9_]*)\\;"
+    match: "\\b([A-Za-z_][A-Za-z0-9_]+)(\\s+(?:private|public|internal|external|inherited))?\\s+([A-Za-z_][A-Za-z0-9_]*)\\;"
   }
   {
     comment: "Operators"
