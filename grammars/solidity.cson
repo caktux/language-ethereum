@@ -14,7 +14,7 @@
     name: "keyword.control"
   }
   {
-    begin: "(?=(contract|struct|function|modifier)\\s+)"
+    begin: "(?=(contract|library|using|struct|function|modifier)\\s+)"
     end: '((?=#)|(?=//)|(?=\n)|(?=\\()|(?={))'
     comment: "Main keywords"
     patterns: [
@@ -22,7 +22,7 @@
         captures:
           "1":
             name: "keyword.control"
-        match: "\\b(contract|struct|function|modifier)\\b"
+        match: "\\b(contract|library|using|struct|function|modifier)\\b"
       }
       {
         captures:
@@ -82,7 +82,7 @@
   }
   {
     comment: "Operators"
-    match: "(=|!|>|<|\\||&)"
+    match: "(=|!|>|<|\\||&|-\\=|\\+\\=)"
     name: "keyword.control"
   }
   {
@@ -103,7 +103,7 @@
   }
   {
     comment: "Strings"
-    match: "([\\\"\\'].*[\\\"\\'])"
+    match: "([\\\"\\'].*?[\\\"\\'])"
     name: "string.quoted"
   }
   {
@@ -136,4 +136,4 @@
       "2":
         name: "variable.parameter"
     comment: "Built-in types"
-    match: "\\b(address|string\\d*|bytes\\d*|int\\d*|uint\\d*|bool|hash\\d*)(?:\\s+(?:indexed\\s+)?([A-Za-z_][A-Za-z0-9_]*)\\s*[,\\)])?"
+    match: "\\b(address|string\\d*|bytes\\d*|int\\d*|uint\\d*|bool|hash\\d*)\\b(?:\\s+(?:indexed\\s+)?([A-Za-z_][A-Za-z0-9_]*)\\s*[,\\)])?"
