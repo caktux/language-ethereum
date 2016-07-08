@@ -14,36 +14,52 @@
     name: "keyword.control"
   }
   {
-    captures:
-      "2":
-        name: "entity.name.function"
-      "3":
-        name: "entity.name.function"
+    begin: "(?=(contract|struct|function|modifier)\\s+)"
+    end: '((?=#)|(?=//)|(?=\n)|(?=\\()|(?={))'
     comment: "Main keywords"
-    match: "\\b(contract|struct|function|modifier)\\s+([A-Za-z_][A-Za-z0-9_]*)(?:\\s+is\\s+([A-Za-z_][A-Za-z0-9_]*))?\\b"
-    name: "keyword.control"
+    patterns: [
+      {
+        captures:
+          "1":
+            name: "keyword.control"
+        match: "\\b(contract|struct|function|modifier)\\b"
+      }
+      {
+        captures:
+          "1":
+            name: "entity.name.function"
+          "2":
+            name: "keyword.control"
+          "3":
+            name: "entity.name.function"
+        match: "([A-Za-z_][A-Za-z0-9_]*)(?:\\s+(?:(is)|,)\\s+([A-Za-z_][A-Za-z0-9_]*))?"
+      }
+    ]
   }
   {
-    captures:
-      "1":
-        name: "constant.language"
-      "2":
-        name: "variable.parameter"
-    comment: "Built-in types"
-    match: "\\b(address|string\\d*|bytes\\d*|int\\d*|uint\\d*|bool|hash\\d*)(?:\\s+(?:indexed\\s+)?([A-Za-z_][A-Za-z0-9_]*)\\s*[,\\)])?\\b"
+    include: "#builtin_types"
   }
   {
-    captures:
-      "1":
-        name: "constant.language"
-      "2":
-        name: "constant.language"
-      "3":
-        name: "constant.language"
-      "4":
-        name: "keyword.control"
-    comment: "Mapping definition"
-    match: "\\b(mapping)\\s*\\((.*)\\s+=>\\s+(.*)\\)(\\s+(?:private|public|internal|external|inherited))?\\s+([A-Za-z_][A-Za-z0-9_]*)\\b"
+    begin: "(?=(mapping)\\s*)"
+    end: '((?=;)|(?=\n))'
+    comment: "Mapping definitions"
+    patterns: [
+      {
+        captures:
+          "1":
+            name: "keyword.control"
+        match: "\\b(mapping)\\b"
+      }
+      {
+        include: "#builtin_types"
+      }
+      {
+        captures:
+          "1":
+            name: "keyword.control"
+        match: "\\b(private|public|internal|external|inherited)\\b"
+      }
+    ]
   }
   {
     comment: "True and false keywords"
@@ -52,7 +68,7 @@
   }
   {
     comment: "Language keywords"
-    match: "\\b(var|import|function|constant|if|else|for|while|do|break|continue|returns?|private|public|internal|external|inherited|this|suicide|new|is|\\_)\\b"
+    match: "\\b(var|import|function|constant|if|else|for|while|do|break|continue|returns?|private|public|internal|external|inherited|this|suicide|new|is|throw|\\_)\\b"
     name: "keyword.control"
   }
   {
@@ -112,3 +128,12 @@
     name: "comment"
   }
 ]
+'repository':
+  'builtin_types':
+    captures:
+      "1":
+        name: "constant.language"
+      "2":
+        name: "variable.parameter"
+    comment: "Built-in types"
+    match: "\\b(address|string\\d*|bytes\\d*|int\\d*|uint\\d*|bool|hash\\d*)(?:\\s+(?:indexed\\s+)?([A-Za-z_][A-Za-z0-9_]*)\\s*[,\\)])?"
