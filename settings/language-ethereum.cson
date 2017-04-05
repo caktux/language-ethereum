@@ -6,3 +6,11 @@
     'commentStart': '# '
     'increaseIndentPattern': '^\\s*(class|def|elif|else|except|finally|for|if|try|with|while)\\b.*:\\s*$'
     'decreaseIndentPattern': '^\\s*(elif|else|except|finally)\\b.*:'
+'.source.solidity':
+  'editor':
+    'autoIndentOnPaste': false
+    'tabLength': 4
+    'foldEndPattern': '^\\s*"""\\s*$'
+    'commentStart': '// '
+    'increaseIndentPattern': '^\\s*(class|def|elif|else|except|finally|for|if|try|with|while)\\b.*:\\s*$'
+    'decreaseIndentPattern': '^\\s*(elif|else|except|finally)\\b.*:'
