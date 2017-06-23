@@ -2,21 +2,13 @@
 // but not colorize them.
 @colored-icons: true;
 
-// pane tab
-@pane-tab-selector: ~'atom-pane .tab-bar .tab .title[data-path]';
-
 // Purple colors
-@mp: #AA759F;
-@lp: lighten(@mp, 15%);
-@dp: darken(@mp, 15%);
+.ethereum-purple when (@colored-icons) { color: #6F42C1; }
 
-.light-purple when (@colored-icons) { color: @lp; }
-.medium-purple when (@colored-icons) { color: @mp; }
-.dark-purple when (@colored-icons) { color: @dp; }
+// Based on https://github.com/file-icons/atom/blob/master/styles/icons.less
+.octicons { font-family: "Octicons Regular"; font-size: 16px; top: 1px; }
+.ethereum-icon { .octicons; .ethereum-purple; content: "\f047"; }
 
-@{pane-tab-selector}, .icon-file-text {
-  &[data-name$=".se"]:before   { .ruby-icon !important; .medium-purple; } /* Colours icon only */
-}
-@{pane-tab-selector}, .icon-file-text {
-  &[data-name$=".sol"]:before   { .ruby-icon !important; .medium-purple; } /* Colours icon only */
+.icon[data-name$=".se"], .icon[data-name$=".sol"] {
+  &:before { .ethereum-icon; } /* Colours icon only */
 }
