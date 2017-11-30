@@ -731,7 +731,7 @@
   #   'match': '(?x)\\b(\n\t\t\t\t(\n\t\t\t\t\tArithmetic|Assertion|Attribute|BlockingIO|BrokenPipe|Buffer|ChildProcess|\n\t\t\t\t\tConnection(Aborted|Refused|Reset)?|EOF|Environment|FileExists|\n\t\t\t\t\tFileNotFound|FloatingPoint|Interrupted|IO|IsADirectoryError|\n\t\t\t\t\tImport|Indentation|Index|Key|Lookup|Memory|Name|NotADirectory|\n\t\t\t\t\tNotImplemented|OS|Overflow|Permission|ProcessLookup|Reference|\n\t\t\t\t\tRuntime|Standard|Syntax|System|Tab|Timeout|Type|UnboundLocal|\n\t\t\t\t\tUnicode(Encode|Decode|Translate)?|Value|VMS|Windows|ZeroDivision\n\t\t\t\t)Error|\n\t\t\t\t((Pending)?Deprecation|Runtime|Syntax|User|Future|Import|Unicode|Bytes)?Warning|\n\t\t\t\t(Base)?Exception|\n\t\t\t\tSystemExit|StopIteration|NotImplemented|KeyboardInterrupt|GeneratorExit\n\t\t\t)\\b'
   #   'name': 'support.type.exception.serpent'
   'builtin_functions':
-    'match': '(?x)\\b(\n\t\t\t\talloc|array|array_lit|call|callcode|create|declare|fun|get|getch|import|inset|invalid|len|load|log|mcopy|min|max|outer|ref|send|save|set|setch|seq|slice|text|suicide|ecrecover|sha256|ripemd160|sha3\n\t\t\t)\\b'
+    'match': '(?x)\\b(\n\t\t\t\talloc|array|array_lit|call|callcode|create|declare|fun|get|getch|import|inset|invalid|len|load|log|mcopy|min|max|outer|ref|send|save|set|setch|seq|slice|text|transfer|suicide|ecrecover|sha256|ripemd160|sha3\n\t\t\t)\\b'
     'name': 'support.function.builtin.serpent'
   'builtin_types':
     'match': '(?x)\\b(\n\t\t\t\tarr|bytes|chars|int|items|str|string|words\n\t\t\t)\\b'
@@ -916,7 +916,7 @@
   'generic_names':
     'match': '[A-Za-z_][A-Za-z0-9_]*'
   'illegal_names':
-    'match': '\\b(and|assert|data|def|elif|else|event|extern|if|macro|not|or|return|stop|unless|while|with|alloc|array|array_lit|call|callcode|create|declare|fun|get|getch|import|inset|invalid|len|load|log|mcopy|min|max|outer|ref|send|save|set|setch|seq|slice|text|suicide|ecrecover|sha256|ripemd160|sha3)\\b'
+    'match': '\\b(and|assert|data|def|elif|else|event|extern|if|macro|not|or|return|stop|unless|while|with|alloc|array|array_lit|call|callcode|create|declare|fun|get|getch|import|inset|invalid|len|load|log|mcopy|min|max|outer|ref|send|save|set|setch|seq|slice|text|transfer|suicide|ecrecover|sha256|ripemd160|sha3)\\b'
     'name': 'invalid.illegal.name.serpent'
   'keyword_arguments':
     'begin': '\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)(?!=)'
