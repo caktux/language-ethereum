@@ -10,7 +10,7 @@
       "2":
         name: "support.function"
     comment: "Events"
-    match: "\\b(event|enum)\\s+([A-Za-z_][A-Za-z0-9_]*)\\b"
+    match: "\\b(event|enum|emit)\\s+([A-Za-z_][A-Za-z0-9_]*)\\b"
     name: "keyword.control"
   }
   {
